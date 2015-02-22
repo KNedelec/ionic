@@ -7761,7 +7761,12 @@ function($collectionRepeatManager, $collectionDataSource, $parse) {
       }
 
       scrollCtrl.$element.on('scroll.resize', rerenderOnResize);
-      ionic.on('resize', rerenderOnResize, window);
+      $scope.$on('$ionicView.enter', function() {
+        ionic.on('resize', rerenderOnResize, window);
+      });
+      $scope.$on('$ionicView.leave', function() {
+        ionic.off('resize', rerenderOnResize, window);
+      });
       var deregisterViewListener;
       if (navViewCtrl) {
         deregisterViewListener = navViewCtrl.scope.$on('$ionicView.afterEnter', viewEnter);
@@ -7770,7 +7775,6 @@ function($collectionRepeatManager, $collectionDataSource, $parse) {
       $scope.$on('$destroy', function() {
         collectionRepeatManager.destroy();
         dataSource.destroy();
-        ionic.off('resize', rerenderOnResize, window);
         (deregisterViewListener || angular.noop)();
       });
     }
