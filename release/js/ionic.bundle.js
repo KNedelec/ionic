@@ -2991,7 +2991,7 @@ function tapEnableTouchEvents() {
   clearTimeout(tapMouseResetTimer);
   tapMouseResetTimer = setTimeout(function() {
     tapEnabledTouchEvents = false;
-  }, 2000);
+  }, 600);
 }
 
 function tapIgnoreEvent(e) {
@@ -49964,7 +49964,7 @@ function RepeatManagerFactory($rootScope, $window, $$rAF) {
         if (item.secondarySize !== dim.secondarySize || item.primarySize !== dim.primarySize) {
           item.node.style.cssText = item.node.style.cssText
             .replace(WIDTH_HEIGHT_REGEX, WIDTH_HEIGHT_TEMPLATE_STR
-              .replace(PRIMARY, (item.primarySize = dim.primarySize) + 1)
+              .replace(PRIMARY, (item.primarySize = dim.primarySize))
               .replace(SECONDARY, (item.secondarySize = dim.secondarySize))
             );
         }
